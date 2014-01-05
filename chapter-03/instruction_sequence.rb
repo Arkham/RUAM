@@ -1,19 +1,6 @@
-def header(title)
-  puts "\n= #{title} ".ljust(80, "=")
-end
+require_relative '../lib/utils'
 
-def disasm(code)
-  puts code
-  puts
-  puts RubyVM::InstructionSequence.compile(code).disasm
-end
-
-def example(title)
-  header(title)
-  disasm(yield)
-end
-
-example "hello" do
+disasm_example "hello" do
 <<END
 10.times do
   puts "Hello World!"
@@ -21,7 +8,7 @@ end
 END
 end
 
-example "variables" do
+disasm_example "variables" do
 <<END
 def display_string
   str = "Local address"
@@ -30,7 +17,7 @@ end
 END
 end
 
-example "arguments" do
+disasm_example "arguments" do
 <<END
 def display_string(str)
   puts str
@@ -38,7 +25,7 @@ end
 END
 end
 
-example "variables in blocks" do
+disasm_example "variables in blocks" do
 <<END
 def display_string
   str = "Hello World"
